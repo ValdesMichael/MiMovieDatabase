@@ -4,15 +4,15 @@
 {
     public class DbInitializer
     {
-        public static void Initialize(MovieContext context)
+        public static void Initialize(MovieContext contextMovie, ShowContext contextShow)
         {
-            // Look for any students.
-            if (context.Movies.Any())
+            // Look for any movies.
+            if (contextMovie.Movies.Any())
             {
                 return;   // database is already present.
-            }
-
-            var movies = new Movie[] //initialize a new database if one doesnt already exists yet
+            } else
+            {
+                var movies = new Movie[] //initialize a new movie database if one doesnt already exists yet
             {
                 new Movie{Title="Midsommar",Release=2019,Genre=MovieType.Horror,Rating=RatingNum.Eight,Description="A couple travel to Sweden to visit their friend's rural hometown for its fabled midsummer festival, but what begins as an idyllic retreat quickly devolves into an increasingly violent and bizarre competition at the hands of a pagan cult."},
                 new Movie{Title="The Green Knight",Release=2021,Genre=MovieType.Fantasy,Rating=RatingNum.Ten,Description="King Arthur's headstrong nephew embarks on a daring quest to confront the Green Knight, a mysterious giant who appears at Camelot. Risking his head, he sets off on an epic adventure to prove himself before his family and court."},
@@ -26,8 +26,27 @@
                 new Movie{Title="The Lighthouse",Release=2018,Genre=MovieType.Thriller,Rating=RatingNum.Eight,Description="Two lighthouse keepers try to maintain their sanity while living on a remote and mysterious New England island in the 1890s." },
             };
 
-            context.Movies.AddRange(movies);
-            context.SaveChanges();
+                contextMovie.Movies.AddRange(movies);
+                contextMovie.SaveChanges();
+            }
+
+            // Look for any shows.
+            if (contextShow.Shows.Any())
+            {
+                return;   // database is already present.
+            }
+            else
+            {
+                var shows = new Show[] //initialize a new movie database if one doesnt already exists yet
+            {
+                new Show{Title="King of The Hill",Release=1997,Genre=MovieType.Sitcom,Rating=RatingNum.Eight, HasEnded=true, WasCancelled=false, EndYear = 2010, Seasons= 13, Description=""},
+            };
+
+                contextShow.Shows.AddRange(shows);
+                contextShow.SaveChanges();
+            }
+
+
         }
     }
 }

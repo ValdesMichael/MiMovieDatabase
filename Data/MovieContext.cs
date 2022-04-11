@@ -10,7 +10,6 @@ namespace MiMovieDatabase.Data
         {
         }
         public DbSet<Movie> Movies { get; set; }
-        public DbSet<Show> Shows { get; set; }
         //public DbSet<MiMovieDatabase.Models.Movie> Movie { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -6,6 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddDbContext<ShowContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ShowContext")));
+
 builder.Services.AddDbContext<MovieContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MovieContext")));
 
@@ -30,9 +33,11 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
-    var context = services.GetRequiredService<MovieContext>();
-    context.Database.EnsureCreated();
-    DbInitializer.Initialize(context);
+    var contextMovie = services.GetRequiredService<MovieContext>();
+    var contextShow = services.GetRequiredService<ShowContext>();
+    contextMovie.Database.EnsureCreated();
+    contextShow.Database.EnsureCreated();
+    DbInitializer.Initialize(contextMovie, contextShow);
 }
 
 app.UseHttpsRedirection();

@@ -8,7 +8,7 @@ namespace MiMovieDatabase.Models
         Action, Adventure, Comedy, Crime, Disaster, Drama, Dramedy, Documentary, Dystopian, Fantasy, Historical, Horror, Romance,
         [Display(Name = "Science Fiction")]
         ScienceFiction,
-        Thriller, Western
+        Sitcom,Thriller, Western
     }
 
     public enum RatingNum

@@ -1,0 +1,79 @@
+﻿@page
+@model MiMovieDatabase.Pages.Shows.CreateModel
+@using MiMovieDatabase.Models
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Show</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Show.Title" class="control-label"></label>
+                <input asp-for="Show.Title" class="form-control" />
+                <span asp-validation-for="Show.Title" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Show.Genre" class="control-label"></label>
+                <select asp-for="Show.Genre" class="form-control" asp-items="Html.GetEnumSelectList<MovieType>()">
+                    <option>Select type ...</option>
+                </select>
+                <span asp-validation-for="Show.Genre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Show.Release" class="control-label"></label>
+                <input asp-for="Show.Release" class="form-control" />
+                <span asp-validation-for="Show.Release" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Show.HasEnded" /> @Html.DisplayNameFor(model => model.Show.HasEnded)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                 <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Show.WasCancelled" /> @Html.DisplayNameFor(model => model.Show.WasCancelled)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Show.EndYear" class="control-label"></label>
+                <input asp-for="Show.EndYear" class="form-control" />
+                <span asp-validation-for="Show.EndYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Show.Seasons" class="control-label"></label>
+                <input asp-for="Show.Seasons" class="form-control" />
+                <span asp-validation-for="Show.Seasons" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Show.Rating" class="control-label"></label>
+                <select asp-for="Show.Rating" class="form-control" asp-items="Html.GetEnumSelectList<RatingNum>()">
+                    <option>Select type ...</option>
+                </select>
+                <span asp-validation-for="Show.Rating" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Show.Description" class="control-label"></label>
+                <input asp-for="Show.Description" class="form-control" />
+                <span asp-validation-for="Show.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

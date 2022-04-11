@@ -8,13 +8,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MiMovieDatabase.Data;
 using MiMovieDatabase.Models;
 
-namespace MiMovieDatabase.Pages.Movies
+namespace MiMovieDatabase.Pages.Shows
 {
     public class CreateModel : PageModel
     {
-        private readonly MiMovieDatabase.Data.MovieContext _context;
+        private readonly MiMovieDatabase.Data.ShowContext _context;
 
-        public CreateModel(MiMovieDatabase.Data.MovieContext context)
+        public CreateModel(MiMovieDatabase.Data.ShowContext context)
         {
             _context = context;
         }
@@ -23,11 +23,10 @@ namespace MiMovieDatabase.Pages.Movies
         {
             return Page();
         }
-
-        [BindProperty]
-        public Movie Movie { get; set; }
         
-
+        [BindProperty]
+        public Show Show { get; set; }
+        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -35,7 +34,7 @@ namespace MiMovieDatabase.Pages.Movies
                 return Page();
             }
 
-            _context.Movies.Add(Movie);
+            _context.Shows.Add(Show);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
